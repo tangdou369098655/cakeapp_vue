@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Swiper :data="data.carouselItems"/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Swiper from '@/components/swiper'
 export default {
   name: 'home',
-  components: {
-    HelloWorld
+  components: { Swiper },
+  data() {
+    return {
+      data: {}
+    }
+  },
+  mounted() {
+    this.getData()
+  },
+  methods: {
+    getData() {
+      this.axios('/index/all').then(data => {
+        this.data = data
+      })
+    }
   }
 }
 </script>
